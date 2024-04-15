@@ -1,4 +1,5 @@
 pipeline {
+    def registry = 'https://gladman.jfrog.io/'
     agent {label 'maven'}
 
     environment {
@@ -55,7 +56,6 @@ pipeline {
             }
         }
 
-        def registry = 'https://gladman.jfrog.io/'
         stage("Jar Publish") {
             steps {
                 script {
