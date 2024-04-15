@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main' url: 'https://github.com/gladmanchikosha-restack/poc-project.git'
+                git branch: 'main', url: 'https://github.com/gladmanchikosha-restack/poc-project.git'
             }
         }
 
