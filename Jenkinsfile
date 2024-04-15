@@ -1,6 +1,6 @@
 //https://dev.to/taikedz/gruelling-groovy-gotchas-loops-closures-and-jenkins-dsls-9pe
 def registry = 'https://gladman.jfrog.io/'
-def imageName = 'gladman.jfrog.io/docker-local/hello-frog:1.0.0'
+def imageName = 'gladman.jfrog.io/docker-local/hello-frog'
 def version = '2.1.2'
 pipeline {
     agent {label 'maven'}
@@ -10,7 +10,6 @@ pipeline {
     environment {
         PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
     }
-
 
     stages {
         stage('Clone') {
