@@ -15,7 +15,17 @@ pipeline {
 
         stage('build'){
             steps {
+                echo "-------------------- build started -------------------- "
                 sh 'mvn clean deploy'
+                echo "-------------------- build completed  -------------------- "
+            }
+        }
+
+        stage('test'){
+            steps{
+                echo "-------------------- build started -------------------- "
+                sh 'mvn surefire-report:report'
+                echo "-------------------- build completed  -------------------- "
             }
         }
 
@@ -25,7 +35,9 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('sonarqube-server') {
+                    echo "-------------------- sonarqube anylysis started -------------------- "
                     sh "${scannerHome}/bin/sonar-scanner"
+                    echo "-------------------- sonarqube anylysis finished-------------------- "
                 }
             }
         }
