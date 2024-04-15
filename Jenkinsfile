@@ -1,5 +1,4 @@
 pipeline {
-    def registry = 'https://gladman.jfrog.io/'
     agent {label 'maven'}
 
     environment {
@@ -59,6 +58,7 @@ pipeline {
         stage("Jar Publish") {
             steps {
                 script {
+                    def registry = 'https://gladman.jfrog.io/'
                     echo '<--------------- Jar Publish Started --------------->'
                     def server = Artifactory.newServer url:registry+"/artifactory" , credentialsId:"jfrog-token"
                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
