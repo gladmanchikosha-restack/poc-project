@@ -1,6 +1,6 @@
 //https://dev.to/taikedz/gruelling-groovy-gotchas-loops-closures-and-jenkins-dsls-9pe
 def registry = 'https://gladman.jfrog.io/'
-def imageName = 'gladman.jfrog.io/docker-local/hello-frog'
+def imageName = 'gladman.jfrog.io/valaxy-docker-docker'
 def version = '2.1.2'
 pipeline {
     agent {label 'maven'}
