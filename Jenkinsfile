@@ -1,3 +1,4 @@
+//https://dev.to/taikedz/gruelling-groovy-gotchas-loops-closures-and-jenkins-dsls-9pe
 pipeline {
     agent {label 'maven'}
 
@@ -77,6 +78,28 @@ pipeline {
                     buildInfo.env.collect()
                     server.publishBuildInfo(buildInfo)
                     echo '<--------------- Jar Publish Ended --------------->'
+                }
+            }
+        }
+
+        stage('Docker Build'){
+            steps{
+                script{
+                    echo "-------------------- Docker Build Started -------------------- "
+                    app = docker.build(imageName+":"+version)
+                    echo "-------------------- Docker Build finished-------------------- "
+                }
+            }
+        }
+
+        stage('Docker Publish'){
+            steps{
+                script{
+                    echo "-------------------- Docker Publish Started -------------------- "
+                    docker.withRegistry(registry, 'jfrog-token'){
+                        app.push()
+                    }
+                    echo "-------------------- Docker Publish finished-------------------- "
                 }
             }
         }
