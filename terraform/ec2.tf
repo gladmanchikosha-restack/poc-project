@@ -7,7 +7,7 @@ resource "aws_ec2_instance_state" "instance_state" {
   instance_id = aws_instance.web[each.key].id
   state       = "running" #Valid values are stopped | running
 }
-// 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
+
 resource "aws_instance" "web" {
   ami           = "ami-08602ac2d592c8c31"
   instance_type = "t3.medium"
