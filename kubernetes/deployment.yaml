@@ -1,0 +1,40 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: test-deployment
+  namespace: test-poc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      imagePullSecrets:
+        - name: jfrogcred
+      containers:
+      - name: test
+        image: gladman.jfrog.io/valaxy-docker-docker-local/gladman:2.1.2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: CONSUMER_KEY
+          value: "sdsdasddsadsadasdasd"
+        - name: CONSUMER_SECRET
+          value: "sdsdasddsadsadasdasd" 
+        - name: CONSUMER_TOKEN
+          value: "sdsdasddsadsadasdasd" 
+        - name: CONSUMER_TOKEN_SECRET
+          value: "sdsdasddsadsadasdasd" 
+
+
+
+# kubectl create secret docker-registry jfrogcred -n test-poc \
+#   --docker-server=gladman.jfrog.io \
+#   --docker-username=gladmanchikosha@gmail.com \
+#   --docker-password=eyJ2ZXIiOiIyIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYiLCJraWQiOiJGVXdjazVOemtjd2JVMFRycm1ualZtakNoLXVWeEhxX2JWcVN0LWNNNU1zIn0.eyJzdWIiOiJqZmFjQDAxaHZmODl0eWI2NWV2MHE0amVmYzcweXgxL3VzZXJzL2dsYWRtYW5jaGlrb3NoYUBnbWFpbC5jb20iLCJzY3AiOiJhcHBsaWVkLXBlcm1pc3Npb25zL2FkbWluIiwiYXVkIjoiKkAqIiwiaXNzIjoiamZmZUAwMWh2Zjg5dHliNjVldjBxNGplZmM3MHl4MSIsImlhdCI6MTcxMzI1NjA3NCwianRpIjoiNDlmYjQ5NzYtYWM0ZC00M2NhLTg2ZjItN2E5YWZmNzRjZmIzIn0.QFtN2EnuMHYHPcgmNF1x25scP9mIuk_E0fLKWt8LLtxGqfLANWoV4jrd-tsTIUdZ51kxRubq0CdYLGTRDchgB-gfgfl4wVTCw5FB4jaGvPnW36vwXL0FPyp8hPjjhB7GWyXIyViMzSC6Sf5feVncUEmqCIxHB90HeYtZbOeBbsjE7ObUGBMWUk4CrgOPEoobOn9Wzag8hdgF7GspvtL6el4ecCPqhUpLIpk0-g5S7kt_JQ6nL9YuTFaCk1Fck0OiDbpwbm8jDjioZT-dhfZmDszVRrRw8f1nU3GRSicoe6WzpWj2Gzy21FK4CLURkOC2ATzW-fkMxFaL0rzQ1xkajg \
+#   --docker-email=gladmanchikosha@gmail.com
