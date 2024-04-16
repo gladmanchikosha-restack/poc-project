@@ -1,0 +1,1 @@
+https:///artifactory/api/maven/poc-test-libs-snapshot

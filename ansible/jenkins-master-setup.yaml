@@ -1,0 +1,39 @@
+- name: Setup Jenkins repository and install Jenkins
+  hosts: jenkins-master
+  become: true
+  tasks:
+    # - name: Download Jenkins GPG key
+    #   get_url:
+    #     url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    #     dest: /usr/share/keyrings/jenkins-keyring.asc
+    
+    # - name: Add Jenkins repository to sources.list.d
+    #   lineinfile:
+    #     path: /etc/apt/sources.list.d/jenkins.list
+    #     line: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+    #     create: yes
+    #     state: present
+
+    # - name: Update apt cache
+    #   apt:
+    #     update_cache: yes
+
+    # - name: Install fontconfig and openjdk-17-jre
+    #   apt:
+    #     name:
+    #       - fontconfig
+    #       - openjdk-17-jre
+    #     state: present
+
+    # - name: Install Jenkins
+    #   apt:
+    #     name: jenkins
+    #     state: present
+
+    - name: Install Jenkins
+      ansible.builtin.shell: |
+        sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key &&
+        echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null &&
+        sudo apt-get update
+        sudo apt-get install fontconfig openjdk-17-jre
+        sudo apt-get install jenkins
